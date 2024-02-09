@@ -7,7 +7,7 @@ import com.javacourse.course2.web_app_staff.repository.ProjectRepository;
 import com.javacourse.course2.web_app_staff.repository.impl.ProjectRepositoryImpl;
 import com.javacourse.course2.web_app_staff.service.ProjectService;
 import com.javacourse.course2.web_app_staff.service.dto.ProjectDto;
-import com.javacourse.course2.web_app_staff.service.dto.ProjectMapper;
+import com.javacourse.course2.web_app_staff.service.dto.mappers.ProjectMapper;
 
 public class ProjectServiceImpl implements ProjectService {
 
@@ -22,7 +22,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public ProjectDto save(ProjectDto projectDto) {
-		Project project = projectRepository.save(projectMapper.map(projectDto));
+		Project projectFromDto = projectMapper.map(projectDto);
+		Project project = projectRepository.save(projectFromDto);
 		return projectMapper.projectToProjectDto(project);
 	}
 

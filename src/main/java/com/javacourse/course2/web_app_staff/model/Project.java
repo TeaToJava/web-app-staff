@@ -16,6 +16,12 @@ public class Project extends SimpleEntity {
 
 	}
 
+	public Project(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+
 	public Project(UUID id, String name, String description) {
 		this.projectId = id;
 		this.name = name;

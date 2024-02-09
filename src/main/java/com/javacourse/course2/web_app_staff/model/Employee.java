@@ -16,9 +16,20 @@ public class Employee extends SimpleEntity {
 
 	}
 
+	public Employee(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Employee(UUID id, String name) {
 		this.employeeId = id;
 		this.name = name;
+	}
+
+	public Employee(String name, Department department) {
+		super();
+		this.name = name;
+		this.department = department;
 	}
 
 	@Override

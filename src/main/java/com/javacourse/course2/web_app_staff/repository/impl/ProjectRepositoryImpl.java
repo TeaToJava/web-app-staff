@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,7 +52,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 	@Override
 	public Project findById(UUID id) {
 		int placeholder = 1;
-		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(GET_PROJECT)) {
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(GET_PROJECT)) {
 			pst.setObject(placeholder, id);
 			try (ResultSet rs = pst.executeQuery()) {
 				Project project = new Project();
@@ -102,21 +104,22 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
 	@Override
 	public List<Project> getAll(UUID userId) {
-		List<Project> projects = new ArrayList<>();
-		List<UUID> projectIds = new ArrayList<>();
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(GET_PROJECTID_BY_USERID)) {
+			List<Project> projects = new ArrayList<>();
+			List<UUID> projectIds = new ArrayList<>();
 			pst.setObject(1, userId);
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					projectIds.add(UUID.fromString(rs.getString("project_id")));
 				}
 			}
+			projectIds.stream().forEach(id -> projects.add(findById(id)));
+			return projects;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		projectIds.stream().forEach(id -> projects.add(findById(id)));
-		return projects;
+		return Collections.emptyList();
 	}
 
 }

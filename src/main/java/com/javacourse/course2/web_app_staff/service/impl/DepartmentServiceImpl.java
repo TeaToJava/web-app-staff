@@ -13,7 +13,7 @@ import com.javacourse.course2.web_app_staff.repository.impl.EmployeeRepositoryIm
 import com.javacourse.course2.web_app_staff.repository.impl.ProjectRepositoryImpl;
 import com.javacourse.course2.web_app_staff.service.DepartmentService;
 import com.javacourse.course2.web_app_staff.service.dto.DepartmentDto;
-import com.javacourse.course2.web_app_staff.service.dto.DepartmentMapper;
+import com.javacourse.course2.web_app_staff.service.dto.mappers.DepartmentMapper;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
