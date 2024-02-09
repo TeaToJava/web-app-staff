@@ -7,5 +7,6 @@ import com.javacourse.course2.web_app_staff.model.SimpleEntity;
 public interface Service {
 	SimpleEntity save(SimpleEntity simpleEntity);
 
-    SimpleEntity findById(UUID uuid);
+    	SimpleEntity findById(UUID uuid);
+	
 }
